@@ -36,16 +36,21 @@
 
 // création d'un nombre aléatoire avec fonction getRamdom() - Nombre quand on lance 1 seule dé !
 
+// Fonction "dicePlayer()" pour jouer avec un seul dé
+
 function dicePlayer() {
+  // Création de la nouvelle div "dice" dans la div "player" par son id
   const newDiv = document.createElement("div");
   console.log(newDiv);
   newDiv.classList.add("dice");
   const divPlayer = document.getElementById("player");
   divPlayer.appendChild(newDiv);
 
+  // Génération du nombre aléatoire du dé
   let numberRandom = Math.round(Math.random() * (6 - 1)) + 1;
   console.log(numberRandom);
 
+  // Association de l'image du dé en fonction du nombre aléatoire du dé
   if (numberRandom === 2) {
     newDiv.style.backgroundPositionX = "-100px";
   } else if (numberRandom === 3) {
@@ -58,14 +63,17 @@ function dicePlayer() {
     newDiv.style.backgroundPositionX = "-500px";
   }
 }
-
+//Lancement de la fonction dicePlayer()
 //dicePlayer();
 
 // Etape n°3 - Lancement de plusieurs dés
 
 // On va demander au joueur avec combien de dés il veut jouer lorsqu'il arrive sur la page de notre jeu
 
+// Fonction "dicePlayer()" pour jouer avec plusieurs dés
 function play() {
+  // On demande au joueur avec combien de dés il veut jouer
+
   let numberDice = parseInt(
     prompt(
       "Avec combien de dés voulez-vous jouer ? Merci d'indiquer le nombre de dés !"
@@ -73,9 +81,12 @@ function play() {
   );
   console.log(numberDice);
 
+  // On répète la fonction dicePlayer autant de fois qu'il y a de dés indiquer par le joueur
+
   for (let i = 0; i < numberDice; i++) {
     dicePlayer();
   }
 }
 
+// On lance la fonction pour jouer avec plusieurs dés
 play();

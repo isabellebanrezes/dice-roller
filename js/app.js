@@ -3,20 +3,20 @@
 // Etape n°1 - Création d'un dé
 
 // Création d'une nouvelle "div" - on va ajouter un élément html via du code en java script - via la DOM !
-const newDiv = document.createElement("div");
-console.log(newDiv);
+//const newDiv = document.createElement("div");
+//console.log(newDiv);
 
 // Ajout d'un classe à notre nouvelle "div"
-newDiv.classList.add("dice");
+//newDiv.classList.add("dice");
 
 // Insérer le nouvelle "div" dans le DOM (avec la méthode "appendChild()" qui ajoute des éléments dans le DOM après le dernier enfant) dans la "div" ayant pour "id ""= "player"
 
 // On va pointer la div ayant la class "board" par son id "player"
 // On créée une constante pour pointer la div "player" et on utilise getElementbyId pour la pointée par son id "player"
-const divPlayer = document.getElementById("player");
+//const divPlayer = document.getElementById("player");
 
 // On insere notre nouvelle div "dice" dans la div "player" pointée par son id en utilisant appendChild()
-divPlayer.appendChild(newDiv);
+//divPlayer.appendChild(newDiv);
 
 // Résultat : on a le dé numéro 1 qui s'affiche !
 
@@ -28,11 +28,24 @@ divPlayer.appendChild(newDiv);
 // On veut des chiffres entre 1 et 6 donc on met un minimum et maximum ; ensuite,on multiplie par 10 et on arrondi avec la fonction
 // Math.random(min,max) : génére un nombre à virgule aléatoire entre 0 et 1
 // Math.round() : retourne la valeur d'un nombre arrondi à l'entier le plus proche
+// getRandom(min, max){ return Math.random() * (max - min) + min}; => fonction pour obtenir un nombre aléatoire dasn un intervalle - les 2 précédentes ne suffisent pas
 
-let numberRandom = Math.round(Math.random((min = 1), (max = 6)) * 10);
+//function getRandom(min, max) {
+//return Math.random() * (max - min) + min;
+//}
+
+// création d'un nombre aléatoire avec fonction getRamdom() - Nombre quand on lance 1 seule dé !
+
+let numberRandom = Math.round(Math.random() * (6 - 1)) + 1;
 console.log(numberRandom);
 
 function dicePlayer() {
+  const newDiv = document.createElement("div");
+  console.log(newDiv);
+  newDiv.classList.add("dice");
+  const divPlayer = document.getElementById("player");
+  divPlayer.appendChild(newDiv);
+
   if (numberRandom === 2) {
     newDiv.style.backgroundPositionX = "-100px";
   } else if (numberRandom === 3) {
@@ -46,4 +59,23 @@ function dicePlayer() {
   }
 }
 
-dicePlayer();
+//dicePlayer();
+
+// Etape n°3 - Lancement de plusieurs dés
+
+// On va demander au joueur avec combien de dés il veut jouer lorsqu'il arrive sur la page de notre jeu
+
+function play() {
+  let numberDice = parseInt(
+    prompt(
+      "Avec combien de dés voulez-vous jouer ? Merci d'indiquer le nombre de dés !"
+    )
+  );
+  console.log(numberDice);
+
+  for (let i = 0; i < numberDice; i++) {
+    dicePlayer();
+  }
+}
+
+play();

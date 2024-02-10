@@ -36,15 +36,15 @@
 
 // création d'un nombre aléatoire avec fonction getRamdom() - Nombre quand on lance 1 seule dé !
 
-let numberRandom = Math.round(Math.random() * (6 - 1)) + 1;
-console.log(numberRandom);
-
 function dicePlayer() {
   const newDiv = document.createElement("div");
   console.log(newDiv);
   newDiv.classList.add("dice");
   const divPlayer = document.getElementById("player");
   divPlayer.appendChild(newDiv);
+
+  let numberRandom = Math.round(Math.random() * (6 - 1)) + 1;
+  console.log(numberRandom);
 
   if (numberRandom === 2) {
     newDiv.style.backgroundPositionX = "-100px";

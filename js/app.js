@@ -38,16 +38,17 @@
 
 // Fonction "dicePlayer()" pour jouer avec un seul dé
 
-function dicePlayer() {
+/* function dicePlayer(newDiv) {
   // Création de la nouvelle div "dice" dans la div "player" par son id
-  const newDiv = document.createElement("div");
+  /* const newDiv = document.createElement("div");
   console.log(newDiv);
   newDiv.classList.add("dice");
   const divPlayer = document.getElementById("player");
-  divPlayer.appendChild(newDiv);
+  divPlayer.appendChild(newDiv); */
 
+/*
   // Génération du nombre aléatoire du dé
-  let numberRandom = Math.round(Math.random() * (6 - 1)) + 1;
+  let numberRandom = Math.round(Math.random() * (6 - 1) + 1);
   console.log(numberRandom);
 
   // Association de l'image du dé en fonction du nombre aléatoire du dé
@@ -62,16 +63,21 @@ function dicePlayer() {
   } else if (numberRandom === 6) {
     newDiv.style.backgroundPosition = "-500px";
   }
+
+  return numberRandom;
+
 }
 //Lancement de la fonction dicePlayer()
-dicePlayer();
+//dicePlayer();
+
+*/
 
 // ###### Etape n°3 - Lancement de plusieurs dés #######
 
 // On va demander au joueur avec combien de dés il veut jouer lorsqu'il arrive sur la page de notre jeu
 
 // Fonction "dicePlayer()" pour jouer avec plusieurs dés
-function play() {
+/*function play() {
   // On demande au joueur avec combien de dés il veut jouer
   let numberDice = parseInt(
     prompt(
@@ -85,6 +91,7 @@ function play() {
     dicePlayer();
   }
 }
+*/
 
 // On lance la fonction pour jouer avec plusieurs dés
 // play();
@@ -92,30 +99,74 @@ function play() {
 // ###### Etape n°4 - Ajouter un adversaire ########
 
 // On va créer une fonction pour un autre joueur : 2ème joueur !
-// On va refaire la foncion dicePlayer en n°2 / "dicePlayerTwo()"
 
-function dicePlayerTwo() {
-  // On ajoute une 2eme nouvelle "div" après la div avec l'id "player"
-  // On créée une constante pour la 2ème div : "newDivTwo" et on utilise "document.createElement()"
-  const newDivTwo = document.createElement("div");
-  console.log(newDivTwo);
+// On ajoute une 2eme nouvelle "div" après la div avec l'id "player"
+// On créée une constante pour la 2ème div : "newDivTwo" et on utilise "document.createElement()"
+const dealer = document.createElement("div");
+console.log(dealer);
 
-  // On ajoute une class "board" à cette nouvelle "div"
-  newDivTwo.classList.add("board");
+// On ajoute une class "board" à cette nouvelle "div"
+dealer.classList.add("board");
 
-  // On ajoute un id à cette nouvelle "div" grace à la propriété "setAttribute(name, value) - name = type d'attribut ici "id" et value = le nom que l'on donne à l'id
-  newDivTwo.setAttribute("id", "dealer");
+// On ajoute un id à cette nouvelle "div" grace à la propriété "setAttribute(name, value) - name = type d'attribut ici "id" et value = le nom que l'on donne à l'id
+dealer.setAttribute("id", "dealer");
 
-  // On va pointer la nouvelle div avec l'id "player"
-  const divPlayerTwo = document.getElementById("app"); // On pointe le div player
+// On va pointer la nouvelle div avec l'id "player"
+const playerDealer = document.getElementById("app"); // On pointe la div app
 
-  // On va insérer la 2eme nouvelle div après la div player avec appenChild
-  divPlayerTwo.appendChild(newDivTwo);
+// On va insérer la 2eme nouvelle div après la div player avec appenChild
+playerDealer.appendChild(dealer);
+
+const boards = document.querySelectorAll(".board");
+console.log(boards);
+
+// On crée une fonction du lancement des dés  pour les 2 joueurs
+
+function globalDice(player) {
+  // On demande au joueur avec combien de dés il veut jouer
+  let numberDice = parseInt(
+    prompt(
+      "Avec combien de dés voulez-vous jouer ? Merci d'indiquer le nombre de dés !"
+    )
+  );
+  console.log(numberDice);
+
+  // Pour chaque dé demandé : on va créer une div Dice (lance)
+  for (let i = 0; i < numberDice; i++) {
+    const diceELement = document.createElement("div");
+    console.log(diceELement);
+    diceELement.classList.add("dice");
+
+    dicePlayer(diceELement);
+
+    player.appendChild(diceELement);
+  }
 }
 
-// On joue la fonction
-dicePlayerTwo();
+// On répète la fonction dicePlayer sur chaque boards (2 boards)
+// player= éléments des boards
 
-// On crée une fonction globale pour l'ensemble des joueurs
+boards.forEach((player) => globalDice(player));
 
-function globalDiceRoller() {}
+// Création d'un fonction pour jouer avec les dés et l'associé à une image
+
+function dicePlayer(diceELement, min = 1, max = 6) {
+  // Génération du nombre aléatoire du dé
+  let numberRandom = Math.round(Math.random() * (max - min) + min);
+  console.log(numberRandom);
+
+  // Association de l'image du dé en fonction du nombre aléatoire du dé
+  if (numberRandom === 2) {
+    diceELement.style.backgroundPositionX = "-100px";
+  } else if (numberRandom === 3) {
+    diceELement.style.backgroundPositionX = "-200px";
+  } else if (numberRandom === 4) {
+    diceELement.style.backgroundPositionX = "-300px";
+  } else if (numberRandom === 5) {
+    diceELement.style.backgroundPositionX = "-400px";
+  } else if (numberRandom === 6) {
+    diceELement.style.backgroundPositionX = "-500px";
+  }
+
+  return numberRandom;
+}

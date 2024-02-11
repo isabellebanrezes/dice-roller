@@ -120,17 +120,17 @@ playerDealer.appendChild(dealer);
 const boards = document.querySelectorAll(".board");
 console.log(boards);
 
-// On crée une fonction du lancement des dés  pour les 2 joueurs
+// On crée une fonction GLOBALE du lancement des dés  pour les 2 joueurs
+
+// On demande au joueur avec combien de dés il veut jouer
+let numberDice = parseInt(
+  prompt(
+    "Avec combien de dés voulez-vous jouer ? Merci d'indiquer le nombre de dés !"
+  )
+);
+console.log(numberDice);
 
 function globalDice(player) {
-  // On demande au joueur avec combien de dés il veut jouer
-  let numberDice = parseInt(
-    prompt(
-      "Avec combien de dés voulez-vous jouer ? Merci d'indiquer le nombre de dés !"
-    )
-  );
-  console.log(numberDice);
-
   // Pour chaque dé demandé : on va créer une div Dice (lance)
   for (let i = 0; i < numberDice; i++) {
     const diceELement = document.createElement("div");
